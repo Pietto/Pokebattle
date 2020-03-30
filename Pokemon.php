@@ -83,3 +83,5 @@ class Pokemon
 		return json_encode($this);
 	}
 }
+
+//sorry ik heb niet zoveel gedaan vandaag  :(

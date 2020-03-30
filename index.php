@@ -1,3 +1,6 @@
+<!-- code written by Pieterjan van Dijk -->
+
+
 <?php
 	require 'Pokemon.php';
 	require 'Attack.php';
