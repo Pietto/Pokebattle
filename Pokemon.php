@@ -2,15 +2,14 @@
 
 class Pokemon
 {
-	/** @var array $pokemons */
 	public static $pokemons = [];
 
-	public $name;
-	public $energyType;
-	public $hitpoints;
-	public $attacks;
-	public $weakness;
-	public $resistance;
+	private $name;
+	private $energyType;
+	private $hitpoints;
+	private $attacks;
+	private $weakness;
+	private $resistance;
 
 	public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
 	{
@@ -24,6 +23,17 @@ class Pokemon
 
         array_push(self::$pokemons, $this);
 	}
+
+    public function getProperty($param)
+    {
+        return $this->$param;
+    }
+
+    public function setProperty($property, $name)
+    {
+        $this->$property = $name;
+        return $this->$property;
+    }
 
 	public function getAttack(string $name): Attack
 	{
@@ -84,4 +94,7 @@ class Pokemon
 	}
 }
 
-//sorry ik heb niet zoveel gedaan vandaag  :(
+class ExtendedPokemon extends Pokemon
+{
+    
+}

@@ -1,4 +1,4 @@
-<!-- code written by Pieterjan van Dijk -->
+<!-- code written by Pieterjan van Dijk lol -->
 
 
 <?php
@@ -7,6 +7,8 @@
 
 	$pikachu = new Pokemon('Pikachu', 'Lightning', 60, [new Attack('Electric Ring', 50, 'Lightning'), new Attack('Pika Punch', 20, 'Lightning')], ['Fire', 1.5], ['Fighting', 20]);
 	$Charmeleon = new Pokemon('Charmeleon', 'Fire', 60, [new Attack('Head Butt', 10, 'Fire'), new Attack('Flare', 30, 'Fire')], ['Water', 2], ['Lightning', 10]);
+
+	$Squirtle = new ExtendedPokemon('Squirtle', 'Water', 60, [new Attack('tackle', 40, 'Water'), new Attack('Tailwhip', 40, 'Water')], 'Fire', 'Grass');
 ?>
 
 <!-- attack -->
@@ -28,6 +30,14 @@
 	print_r(json_encode(Pokemon::getPopulation()));
 	echo '<br>';
 	print_r(json_encode(Pokemon::getPopulationHealth()));
+
+
+
+	/*echo $pikachu->setProperty('energyType','abacadabra');
+	echo '<br>';
+	echo $pikachu->getProperty('energyType');*/
+	echo '<br>aaa<br>';
+	echo getProperty('name');
 ?>
 
 <!DOCTYPE html>
