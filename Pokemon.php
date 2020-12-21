@@ -1,68 +1,72 @@
 <?php
 
-class Pokemon
-{
-	public static $pokemons = [];
+class Pokemon {
+	protected static $pokemons = [];
 
-	private $name;
-	private $energyType;
-	private $hitpoints;
-	private $attacks;
-	private $weakness;
-	private $resistance;
+	protected $name;
+	protected $energyType;
+	protected $hitpoints;
+	protected $attack;
+	protected $weakness;
+	protected $resistance;
 
-	public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
-	{
+	public function __construct($name, $energyType, $hitpoints, $attack, $weakness, $resistance) {
         $this->name = $name;
         $this->energyType = $energyType;
         $this->hitpoints = $hitpoints;
         $this->health = $hitpoints;
-        $this->attacks = $attacks;
+        $this->attack = $attack;
         $this->weakness = $weakness;
         $this->resistance = $resistance;
 
         array_push(self::$pokemons, $this);
-	}
-
-    public function getProperty($param)
-    {
-        return $this->$param;
     }
 
-    public function setProperty($property, $name)
-    {
-        $this->$property = $name;
-        return $this->$property;
+    function GetName() {
+        return $this->name;
     }
 
-	public function getAttack(string $name): Attack
-	{
-        foreach ($this->attacks as $attack)
-        {
-            if ($attack->name == $name)
-            {
-                return $attack;
-            }
+    function GetEnergyType() {
+        return $this->energyType;
+    }
+
+    function GetHealth() {
+        return $this->health;
+    }
+
+    function GetAttackName($attackNumber){
+        return $this->attack[$attackNumber]->GetName();
+    }
+
+    function GetAttackDamage($attackNumber){
+        return $this->attack[$attackNumber]->GetPower();
+    }
+
+    function Attack($target, $attackNumber) {
+        $target->damage($this->energytype, $this->attack[$attackNumber]->GetPower());
+    }
+
+    function damage($energytype, $damage) {
+        $this->health -= $damage;
+        if($this->health < 0) {
+            $this->health = 0;
         }
-        return null;
     }
 
-    public function attack(Pokemon $target, Attack $attack) : void
-    {
-    	$power = $attack->power;
-    	if($target->weakness == $attack->energyType)
-    		{
-    		$power = $power*2;
-    	}
-    	else if($target->Resistance == $attack->energyType)
-    	{
-    		$power = $power/2;
-    	}
-    	$target->health -= $power;
-    }
+    // public function attack(Pokemon $target, Attack $attack) : void {
+    // 	$power = $attack->power;
+    // 	if($target->weakness == $attack->energyType)
+    // 		{
+    // 		$power = $power*2;
+    // 	}
+    // 	else if($target->Resistance == $attack->energyType)
+    // 	{
+    // 		$power = $power/2;
+    // 	}
+    // 	$target->health -= $power;
+    // }
 
-    public static function getPopulation(): array
-    {
+    public static function getPopulation(): array  {
         $livingPokemons = [];
         foreach(self::$pokemons as $Pokemon)
         {
@@ -74,8 +78,7 @@ class Pokemon
         return $livingPokemons;
     }
 
-    public static function getPopulationHealth()
-    {
+    public static function getPopulationHealth() {
         $livingPokemons = [];
     	foreach(self::$pokemons as $Pokemon)
     	{
@@ -88,13 +91,7 @@ class Pokemon
     	return $total/count($livingPokemons);
     }
 
-	public function __toString()
-	{
+	public function __toString() {
 		return json_encode($this);
 	}
-}
-
-class ExtendedPokemon extends Pokemon
-{
-    
 }
